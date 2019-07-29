@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" style="width: 100%; height: 100%;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../public/lib/vue.js"></script>
+    <script src="../public/lib/vue-router.js"></script>
+    <script src="../public/lib/vue-resource.js"></script>
+</head>
+
+<body style="width: 100%; height: 100%;margin: 0">
+    <div style="width: 100%; height: 100%;margin: 0" id="gameParam">
+
+        <!-- 标题层div -->
+        <div style="border: 1px solid #999; width:calc(100% - 2px);height: calc(8% - 2px);
+        position:fixed; left:0%; top:1%;background-color: chartreuse;">
+            <div style="border: 1px solid #999;width:calc(20% - 2px);height: calc(100% - 2px);
+            text-align: center;float: left;">
+                <p>{{title}}</p>
+            </div>
+            <!-- 输入框div -->
+            <div style="border: 1px solid #999;width: calc(60% - 2px);
+            height: calc(100% - 2px);margin-left: 10%;float: left">
+                <p>{{passWordStr}}<input type="text" style="width: calc(50% - 2px);height: 100%;" v-model="passWord">
+                </p>
+            </div>
+        </div>
+
+        <!-- 输入层div -->
+        <div style="border: 1px solid #999;width:calc(100% - 2px);height: calc(15% - 2px);
+    position:fixed; left:0%; top:10%;background-color: chartreuse;">
+            <!-- 人数层 -->
+            <div style="border: 1px solid #999;width: calc(90% - 2px);height: calc(40% - 2px);
+            margin-left:10%;text-align: center;">
+                <div style="border: 1px solid #999;width: calc(30% - 2px);height: calc(100% - 2px);float: left;">
+                    {{goodMan}}{{goodManNum}}
+                </div>
+                <div style="border: 1px solid #999;width: calc(30% - 2px);height: calc(100% - 2px);float: left;">
+                    {{otherMan}}{{otherManNum}}
+                </div>
+                <div style="border: 1px solid #999;width: calc(30% - 2px);height: calc(100% - 2px);float: left;">
+                    {{wolfMan}}{{wolfManNum}}
+                </div>
+            </div>
+            <!-- 村民狼人div -->
+            <div style="border: 1px solid #999;width: calc(100% - 2px);height: calc(60% - 2px);
+                text-align: center;">
+                <div style="border: 1px solid #999;width: calc(45% - 2px);height: calc(100% - 2px);
+                float: left;">
+                    <div style="border: 1px solid #999;width: calc(25% - 2px);
+                        height: calc(100% - 2px); float: left">
+                        <button style="margin-top: 50%;margin-left: 20%;" v-on:click="lessGoodMan">
+                            -
+                        </button>
+                    </div>
+                    <div style="border: 1px solid #999;width: calc(50% - 2px);
+                        height: calc(100% - 2px); float: left;">
+                        <p style="text-align: center;font-size: 120%;">{{villager.role_china_name}}</p>
+                    </div>
+                    <div style="border: 1px solid #999;width: calc(25% - 2px);
+                        height: calc(100% - 2px); float: left">
+                        <button style="margin-top: 50%;margin-left: 20%;" v-on:click="addGoodMan()">
+                            +
+                        </button>
+                    </div>
+                </div>
+
+
+                <div style="border: 1px solid #999;width: calc(45% - 2px);height: calc(100% - 2px); float: left;
+                margin-left: 7%;">
+                    <div style="border: 1px solid #999;width: calc(25% - 2px);
+                        height: calc(100% - 2px); float: left">
+                        <button style="margin-top: 50%;margin-left: 20%;" v-on:click="lessWolfMan">
+                            -
+                        </button>
+                    </div>
+                    <div style="border: 1px solid #999;width: calc(50% - 2px);
+                        height: calc(100% - 2px); float: left;">
+                        <p style="text-align: center;font-size: 120%;">{{wolf.role_china_name}}</p>
+                    </div>
+                    <div style="border: 1px solid #999;width: calc(25% - 2px);
+                        height: calc(100% - 2px); float: left">
+                        <button style="margin-top: 50%;margin-left: 20%;" v-on:click="addWolfMan">
+                            +
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 角色层div -->
+        <div style="width:100%;height: 60%;padding-top:220px;padding-bottom:250px;">
+            <div style="border: 1px solid orchid;width:calc(100% - 2px);height: calc(25% - 2px);">
+                <!-- key是保证循环每一项的独立性 -->
+                <template v-for="item in roleList">
+                    <div style="float: left; width: calc(20% - 2px);height: calc(90% - 2px);
+                    border: 1px solid orchid;margin-left: 10%;" v-on:click="changeGodMan(item.role_type,item.role_id)">
+                        {{item.role_china_name}}
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <!-- 底部层div -->
+        <div style="border: 1px solid #999;background-color: yellow; width:calc(100% - 2px);
+        height: calc(12% - 2px);position:fixed; left:0px; bottom:0px;">
+            <!-- 返回div -->
+            <div style="border: 1px solid #999;height: calc(80% - 2px);width: 30%;margin-left: 13%;float: left;"></div>
+            <!-- 确定div -->
+            <div style="border: 1px solid #999;height: calc(80% - 2px);width: 30%;margin-left: 13%;float: left;">
+            <button style="border: 1px solid #999;height: calc(80% - 2px);width: calc(70% - 2px);margin-left: 13%;"
+             v-on:click="createGame()">
+             确定
+            </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/createGame.js"></script>
+</body>
+
+</html>

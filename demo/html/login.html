@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>夏岚的工具箱</title>
+    <script src="../public/lib/vue.js"></script>
+    <script src="../public/lib/vue-resource.js"></script>
+    <script src="../public/lib/vue-router.js"></script>
+</head>
+
+<body>
+    <div id="login">
+        <!-- 1.背景层div -->
+        <div style="width: 100%; border:1px;position:relative;top:0%;bottom: 20%;">
+            <div>
+                <img src="../public/images/login.jpg" style="width: 100%;">
+            </div>
+        </div>
+
+        <!-- 2.帐号层div -->
+        <div style="width: 100%; border:1px;position:absolute;top:60%;bottom: 30%;">
+            <!-- 帐号div -->
+            <div style="position:absolute; left:5%;right: 75%; top:20%;bottom: 20%;">
+                <div style="position: relative;left: 5%; top: 10%; font-size: 20px;">
+                    帐号:
+                </div>
+            </div>
+
+            <!-- 输入框div -->
+            <div style="position:absolute;float: left;left:22%;right: 30%;top:20%;bottom: 20% ">
+                <div style="position: relative;">
+                    <input v-model="user_name" type="text" style="width:180px;height:33px;font-size:22px;border-width: 1px;">
+                </div>
+            </div>
+
+            <!-- 注册div -->
+            <div style="position:absolute;float: left;left:80%;right: 10%;top:20%;bottom: 20% ">
+                <div style="position:relative; top:10%;bottom: 20%;">
+                    <a href="./register.html" style="font-size:18px;text-decoration:none">注册</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3.密码层div -->
+        <div style="width: 100%;top:60%;bottom: 20%;">
+            <!-- 密码div -->
+            <div style="position: absolute;left:5%;right: 75%;top:70%;bottom: 24%;">
+                <div style="position: relative;left: 12%; top: 10%; font-size: 20px;">
+                    密码:
+                </div>
+            </div>
+            <!-- 输入框div -->
+            <div style="position:absolute;float: left;left:24%;right: 32%;top:70%;bottom: 24% ">
+                <div style="position: relative;">
+                    <input v-model="pass_word" type="password" style="width:180px;height:33px;font-size:22px;border-width: 1px;">
+                </div>
+            </div>
+        </div>
+
+        <!-- 4.登录层div -->
+        <div style="width: 100%; position:absolute;top:76%;bottom: 10%;">
+            <div style="position:absolute;left:30%;right: 35%;top:30%;bottom: 30%;">
+                <button style="height: 35px;width: 130px;
+                background-color: cornflowerblue;border-radius: 7px;" v-on:click="getToken">
+                    登录
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="../js/login.js"></script>
+</body>
+
+</html>
